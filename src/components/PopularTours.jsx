@@ -118,7 +118,6 @@ const Story = styled.div`
   border-radius: 15px;
   overflow: hidden;
   position: relative;
-  cursor: pointer;
   transition: transform 0.3s ease;
 
   &:hover {
