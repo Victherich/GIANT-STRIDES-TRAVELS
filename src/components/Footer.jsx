@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Fade } from "react-awesome-reveal";
-import { FaPhoneAlt, FaWhatsapp, FaMapMarkerAlt } from "react-icons/fa";
+import { FaPhoneAlt, FaWhatsapp, FaMapMarkerAlt, FaEnvelopeOpen } from "react-icons/fa";
 import logo from '../Images/logo.jpeg'
 import { NavLink } from "react-router-dom";
 
@@ -17,7 +17,7 @@ const Footer = () => {
           <Img src={logo} alt="logo"/>
             <Logo>Huda Giant Stride</Logo>
             <SubLogo>Travel & Tours Ltd</SubLogo>
-            <Text>
+            <Text >
               We deliver seamless, memorable, and enriching travel experiences
               for leisure and business travelers worldwide.
             </Text>
@@ -76,11 +76,12 @@ const Footer = () => {
               <FaPhoneAlt /> Office Phone: 08143576329
             </ContactItem>
             <ContactItem>
-              <FaMapMarkerAlt /> Reservation Officer: Nancy Anietie
+              <FaMapMarkerAlt /> Obum plaza,suit 408 ,plot 1140 Adetokunbo ademola crescent wuse 2 Abuja.
             </ContactItem>
-            <ContactItem>
-              <FaMapMarkerAlt /> General Manager: Gloria Ologure
+             <ContactItem>
+              <FaEnvelopeOpen /> hudagiantstridetraveltourltd@gmail.com
             </ContactItem>
+          
           </Column>
 
         </FooterContent>
@@ -104,7 +105,7 @@ export default Footer;
 const FooterContainer = styled.footer`
   background: #111;
   color: #fff;
-  margin-top: 4rem;
+//   margin-top: 4rem;
 `;
 
 const FooterContent = styled.div`
@@ -134,6 +135,7 @@ const Text = styled.p`
   line-height: 1.7;
   color: #bbb;
   font-size: 0.95rem;
+
 `;
 
 const Title = styled.h3`

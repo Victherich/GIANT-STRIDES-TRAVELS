@@ -2,50 +2,51 @@ import React from "react";
 import styled from "styled-components";
 
 import { Fade } from "react-awesome-reveal";
+import paris from '../Images/paris.png'
+import dubai from '../Images/dubai.png'
+import london from '../Images/london.png'
+import japan from '../Images/japan.png'
+import china from '../Images/china.png'
+import australia from '../Images/australia.png'
 
 const tours = [
   {
     title: "Paris Romantic Getaway",
     description: "Explore the city of love with our exclusive Paris tour package.",
-    image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=80",
+    image: paris,
     route: "/tours/paris",
   },
   {
-    title: "Safari Adventure in Kenya",
+    title: "Dubai",
     description: "Experience wildlife up close in a thrilling safari adventure.",
-    image: "https://images.unsplash.com/photo-1506224470994-2b7c5b8b0f9b?auto=format&fit=crop&w=800&q=80",
+    image: dubai,
     route: "/tours/kenya-safari",
   },
   {
-    title: "Beach Holiday in Maldives",
+    title: "London",
     description: "Relax on pristine beaches with crystal-clear waters.",
-    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
+    image: london,
     route: "/tours/maldives",
   },
   {
     title: "Cultural Tour of Japan",
     description: "Discover Japan’s rich culture, temples, and modern cities.",
-    image: "https://images.unsplash.com/photo-1559181567-c3190ca9959?auto=format&fit=crop&w=800&q=80",
+    image: japan,
     route: "/tours/japan",
   },
    {
-    title: "Cultural Tour of Japan",
+    title: "China",
     description: "Discover Japan’s rich culture, temples, and modern cities.",
-    image: "https://images.unsplash.com/photo-1559181567-c3190ca9959?auto=format&fit=crop&w=800&q=80",
+    image: china,
     route: "/tours/japan",
   },
     {
     title: "Cultural Tour of Japan",
     description: "Discover Japan’s rich culture, temples, and modern cities.",
-    image: "https://images.unsplash.com/photo-1559181567-c3190ca9959?auto=format&fit=crop&w=800&q=80",
+    image: australia,
     route: "/tours/japan",
   },
-   {
-    title: "Cultural Tour of Japan",
-    description: "Discover Japan’s rich culture, temples, and modern cities.",
-    image: "https://images.unsplash.com/photo-1559181567-c3190ca9959?auto=format&fit=crop&w=800&q=80",
-    route: "/tours/japan",
-  },
+ 
 ];
 
 const PopularToursStories = () => {
@@ -60,7 +61,7 @@ const PopularToursStories = () => {
               <Image src={tour.image} alt={tour.title} />
               <Overlay>
                 <Title>{tour.title}</Title>
-                <Description>{tour.description}</Description>
+                {/* <Description>{tour.description}</Description> */}
               </Overlay>
             </Story>
           ))}

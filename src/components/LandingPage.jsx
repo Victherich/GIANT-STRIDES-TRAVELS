@@ -6,6 +6,8 @@ import PopularTours from "./PopularTours";
 import Testimonials from "./Testimonials";
 
 import WhyAndHow from "./WhyAndHow";
+import EngagementSection from "./EngagementSection";
+import AboutBrief from "./AboutBrief";
 
 
 const LandingPage =()=>{
@@ -16,7 +18,8 @@ const LandingPage =()=>{
             
              <PopularTours/>
              <WhyAndHow/>
-            
+            <EngagementSection/>
+            <AboutBrief/>
            <Testimonials/>
         </div>
     )
