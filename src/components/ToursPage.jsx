@@ -1,37 +1,68 @@
 // ToursPage.jsx
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2'
 
-const tours = [
-  {
-    id: 1,
-    title: "Dubai Luxury Escape",
-    location: "Dubai, UAE",
-    price: "$1,200",
-    image:
-      "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZHViaXxlbnwwfHwwfHw%3D&ixlib=rb-4.0.3&q=80&w=1080",
-  },
-  {
-    id: 2,
-    title: "Maldives Paradise",
-    location: "Maldives",
-    price: "$2,500",
-    image:
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bWFsdmVkaWVzfGVufDB8fDB8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1080",
-  },
-  {
-    id: 3,
-    title: "Paris Romantic Getaway",
-    location: "Paris, France",
-    price: "$1,800",
-    image:
-      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGFyaXN8ZW58MHx8MHx8&ixlib=rb-4.0.3&q=80&w=1080",
-  },
-];
+// const tours = [
+//   {
+//     id: 1,
+//     title: "Dubai Luxury Escape",
+//     location: "Dubai, UAE",
+//     price: "$1,200",
+//     image:
+//       "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZHViaXxlbnwwfHwwfHw%3D&ixlib=rb-4.0.3&q=80&w=1080",
+//   },
+//   {
+//     id: 2,
+//     title: "Maldives Paradise",
+//     location: "Maldives",
+//     price: "$2,500",
+//     image:
+//       "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bWFsdmVkaWVzfGVufDB8fDB8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1080",
+//   },
+//   {
+//     id: 3,
+//     title: "Paris Romantic Getaway",
+//     location: "Paris, France",
+//     price: "$1,800",
+//     image:
+//       "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGFyaXN8ZW58MHx8MHx8&ixlib=rb-4.0.3&q=80&w=1080",
+//   },
+// ];
 
 const ToursPage = () => {
   const navigate = useNavigate();
+  const [tours, setTours]=useState([]);
+
+    // FETCH TOURS
+  const fetchTours = () => {
+    Swal.fire({
+      title: "Loading tours...",
+      allowOutsideClick: false,
+      didOpen: () => Swal.showLoading(),
+    });
+
+    fetch("https://hudagiantstridetravelsandtour.com/api/getTours.php")
+      .then((res) => res.json())
+      .then((data) => {
+        Swal.close();
+        if (data.success) {
+          setTours(data.tours);
+        } else {
+          Swal.fire("Error", data.error || "Failed to fetch tours", "error");
+        }
+      })
+      .catch((err) => {
+        Swal.close();
+        console.error(err);
+        Swal.fire("Error", "Something went wrong while fetching tours", "error");
+      });
+  };
+
+  useEffect(() => {
+    fetchTours();
+  }, []);
 
   return (
     <Container>
@@ -42,13 +73,13 @@ const ToursPage = () => {
 
       <Grid>
         {tours.map((tour) => (
-          <Card key={tour.id} style={{ backgroundImage: `url(${tour.image})` }}>
+          <Card key={tour.id} style={{ backgroundImage: `url(https://hudagiantstridetravelsandtour.com/api/${tour.image})` }}>
             <Overlay />
             <Content>
               <h3>{tour.title}</h3>
               <p>{tour.location}</p>
               <Bottom>
-                <span>{tour.price}</span>
+                <span>NGN {Number(tour.price).toLocaleString()}</span>
                 <ExploreBtn onClick={() => navigate(`/tour/${tour.id}`)}>
                   Explore
                 </ExploreBtn>

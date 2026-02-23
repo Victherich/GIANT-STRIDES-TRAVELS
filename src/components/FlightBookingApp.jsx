@@ -481,7 +481,7 @@ const FlightBookingApp = () => {
 
   const sendPaymentEmail = async (reference, details) => {
     try {
-      const response = await fetch('https://harvannatravelsandtour.com/api/send-booking-email.php', {
+      const response = await fetch('https://hudagiantstridetravelsandtour.com/api/send-booking-email.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ reference, ...details, amount: totalAmount }),
