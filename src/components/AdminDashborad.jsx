@@ -7,6 +7,7 @@ import { adminLogout } from '../Features/Slice';
 import AdminDetailsPage from './AdminProfile';
 import ManageToursPage from './ManageToursPage';
 import DashboardHomeButton from './DashboardHomeButton';
+import ManageHotelsPage from './ManageHotelsPage';
 
 // Styled Components
 const DashboardContainer = styled.div`
@@ -160,6 +161,9 @@ const AdminDashboard = () => {
 
     case "tours":
       return <ManageToursPage />;
+
+       case "hotels":
+      return <ManageHotelsPage />;
 
     default:
       return (

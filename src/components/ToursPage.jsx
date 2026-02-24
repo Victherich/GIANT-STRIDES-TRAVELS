@@ -173,6 +173,7 @@ const ExploreBtn = styled.button`
   font-weight: bold;
   cursor: pointer;
   transition: background 0.3s ease;
+  margin-left:10px;
 
   &:hover {
     background: #2f7c38;

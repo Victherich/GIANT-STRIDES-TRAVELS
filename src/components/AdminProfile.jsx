@@ -226,39 +226,36 @@ const AdminDetailsPage = ({ adminId, onNavigate }) => {
     <FaMapMarkedAlt /> Post and Manage Tours
   </ActionItem>
 
-  <ActionItem onClick={() => onNavigate("allstudents")}>
+  <ActionItem onClick={() => onNavigate("hotels")}>
     <FaHotel /> Post and Manage Hotels
   </ActionItem>
 
-  <ActionItem onClick={() => onNavigate("alllecturers")}>
-    <FaMapMarkedAlt /> Post and Manage Tours
-  </ActionItem>
-
+{/* 
   <ActionItem onClick={() => onNavigate("allstudents")}>
     <FaHistory /> Hotels Booking History
-  </ActionItem>
+  </ActionItem> */}
 
-  <ActionItem onClick={() => onNavigate("alladmin")}>
+  {/* <ActionItem onClick={() => onNavigate("alladmin")}>
     <FaClipboardList /> Tours Booking History
-  </ActionItem>
+  </ActionItem> */}
 
-  <ActionItem onClick={() => onNavigate("alladmin")}>
+  {/* <ActionItem onClick={() => onNavigate("alladmin")}>
     <FaPlane /> Flights Booking History
-  </ActionItem>
+  </ActionItem> */}
 
 
   {/*  */}
- <ActionItem onClick={() => onNavigate("allstudents")}>
+ {/* <ActionItem onClick={() => onNavigate("allstudents")}>
   <FaPassport /> Visa / Travel Doc Applications
-</ActionItem>
+</ActionItem> */}
 
-<ActionItem onClick={() => onNavigate("alladmin")}>
+{/* <ActionItem onClick={() => onNavigate("alladmin")}>
   <FaShuttleVan /> Airport Transfer / Ground Transport Applications
-</ActionItem>
+</ActionItem> */}
 
-<ActionItem onClick={() => onNavigate("alladmin")}>
+{/* <ActionItem onClick={() => onNavigate("alladmin")}>
   <FaUmbrellaBeach /> Travel Insurance Applications
-</ActionItem>
+</ActionItem> */}
 </ActionList>
       </Timeline>
 

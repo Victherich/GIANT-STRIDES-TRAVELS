@@ -1,43 +1,116 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Fade } from "react-awesome-reveal";
 import hotelsbg from '../Images/hotelsbg.png'
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 // Sample hotel images (replace with real data/API later)
-const hotels = [
-  {
-    name: "Transcorp Hilton Abuja",
-    location: "Abuja, Nigeria",
-    price: "₦180,000 / night",
-    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945",
-    id:"1"
-  },
-  {
-    name: "Eko Hotels & Suites",
-    location: "Lagos, Nigeria",
-    price: "₦150,000 / night",
-    image: "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa",
-    id:"2"
-  },
-  {
-    name: "Radisson Blu Anchorage",
-    location: "Victoria Island, Lagos",
-    price: "₦200,000 / night",
-    image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267",
-    id:"3"
-  },
-  {
-    name: "Sheraton Hotel",
-    location: "Ikeja, Lagos",
-    price: "₦130,000 / night",
-    image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b",
-    id:"4"
-  },
-];
+// const hotels = [
+//   {
+//     name: "Transcorp Hilton Abuja",
+//     location: "Abuja, Nigeria",
+//     price: "₦180,000 / night",
+//     image: "https://images.unsplash.com/photo-1566073771259-6a8506099945",
+//     id:"1"
+//   },
+//   {
+//     name: "Eko Hotels & Suites",
+//     location: "Lagos, Nigeria",
+//     price: "₦150,000 / night",
+//     image: "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa",
+//     id:"2"
+//   },
+//   {
+//     name: "Radisson Blu Anchorage",
+//     location: "Victoria Island, Lagos",
+//     price: "₦200,000 / night",
+//     image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267",
+//     id:"3"
+//   },
+//   {
+//     name: "Sheraton Hotel",
+//     location: "Ikeja, Lagos",
+//     price: "₦130,000 / night",
+//     image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b",
+//     id:"4"
+//   },
+// ];
+
+
 
 const HotelsPage = () => {
     const navigate = useNavigate();
+    const [hotels,setHotels]=useState([]);
+
+
+const BASE_URL = "https://hudagiantstridetravelsandtour.com/api/";
+    const fetchHotels = async () => {
+      Swal.fire({
+        title: "Loading hotels...",
+        allowOutsideClick: false,
+        didOpen: () => Swal.showLoading(),
+      });
+    
+      try {
+        const res = await fetch(BASE_URL + "getHotels.php");
+    
+        // HANDLE BAD RESPONSE
+        if (!res.ok) {
+          throw new Error("Server error");
+        }
+    
+        const data = await res.json();
+    
+        if (!data.success) {
+          throw new Error(data.error || "Failed to fetch hotels");
+        }
+    
+        // 🔥 NORMALIZE DATA (VERY IMPORTANT)
+        const formattedHotels = data.hotels.map((hotel) => {
+          return {
+            ...hotel,
+    
+            // Ensure arrays
+            images: Array.isArray(hotel.images) ? hotel.images : [],
+            amenities: Array.isArray(hotel.amenities) ? hotel.amenities : [],
+    
+            // Ensure numbers
+            price: Number(hotel.price),
+            bedroom: Number(hotel.bedroom),
+            qty: Number(hotel.qty),
+    
+            // FIX IMAGE URL (if backend returns relative path)
+            imagesFull: (hotel.images || []).map(
+              (img) =>
+                img.startsWith("http")
+                  ? img
+                  : BASE_URL + img
+            ),
+          };
+        });
+    
+        setHotels(formattedHotels);
+        Swal.close();
+    
+      } catch (err) {
+        Swal.close();
+        console.error("FETCH ERROR:", err);
+    
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: err.message || "Something went wrong",
+        });
+      }
+    };
+
+
+    useEffect(()=>{
+        fetchHotels();
+    },[])
+
+
   return (
     <Page>
       {/* HERO SECTION */}
@@ -47,12 +120,12 @@ const HotelsPage = () => {
           <h1>Find Your Perfect Stay</h1>
           <p>Discover the best hotels at the best prices</p>
 
-          <SearchBox>
+          {/* <SearchBox>
             <input type="text" placeholder="Where are you going?" />
             <input type="date" />
             <input type="date" />
             <button>Search</button>
-          </SearchBox>
+          </SearchBox> */}
         </HeroContent>
       </Hero>
 
@@ -68,14 +141,14 @@ const HotelsPage = () => {
             <Grid>
               {hotels.map((hotel, index) => (
                 <Card key={index}>
-                  <Image src={hotel.image} alt={hotel.name} />
+                  <Image src={`https://hudagiantstridetravelsandtour.com/api/${hotel.images?.[0]}`} alt={hotel.name} />
 
                   <CardContent>
                     <h3>{hotel.name}</h3>
                     <p className="location">{hotel.location}</p>
 
                     <BottomRow>
-                      <Price>{hotel.price}</Price>
+                      <Price>NGN {Number(hotel.price).toLocaleString()}</Price>
                       <BookBtn onClick={()=>navigate(`/hotel/${hotel.id}`)}>Book Now</BookBtn>
                     </BottomRow>
                   </CardContent>
@@ -99,7 +172,7 @@ const Page = styled.div`
 
 /* HERO */
 const Hero = styled.section`
-  height: 90vh;
+  height: 50vh;
   background-image: url(${hotelsbg});
   background-size: cover;
   background-position: center;

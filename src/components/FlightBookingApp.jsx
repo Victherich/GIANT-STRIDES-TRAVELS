@@ -446,11 +446,12 @@ const FlightBookingApp = () => {
     setIsSubmitting(true);
     const paystack = new PaystackPop();
     paystack.newTransaction({
-         key: 'pk_test_41a396ef9a4f9c53cf4f1139cc7e7002fc085f55',
+         key: 'pk_test_60e1f53bba7c80b60029bf611a26a66a9a22d4e4',
       amount: totalAmount * 100, // in kobo
       email: formData.email,
       firstname: formData.name,
       phone: formData.phone,
+        channels: ['card'],
       onSuccess: (transaction) => {
         sendPaymentEmail(transaction.reference, formData);
 

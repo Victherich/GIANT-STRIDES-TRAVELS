@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
+import BackButton from "./BackButton";
 
 const TourDetail = () => {
   const { id } = useParams();
@@ -57,6 +58,7 @@ const TourDetail = () => {
           </PriceBox>
         </Right>
       </Content>
+      <BackButton/>
     </Container>
   );
 };
