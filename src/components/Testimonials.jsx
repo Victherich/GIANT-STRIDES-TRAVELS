@@ -163,11 +163,236 @@
 // `;
 
 
-import React, { useEffect, useState, useRef } from "react";
-import styled from "styled-components";
-import { FaStar, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+// import React, { useEffect, useState, useRef } from "react";
+// import styled from "styled-components";
+// import { FaStar, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
-const testimonials = [
+// const testimonials = [
+//   {
+//     name: "Nancy Anietie",
+//     role: "Reservation Officer",
+//     photo: "https://randomuser.me/api/portraits/women/44.jpg",
+//     rating: 5,
+//     review:
+//       "Huda Giant Stride Travel and Tours made my trip seamless and unforgettable. The support team was incredible!",
+//   },
+//   {
+//     name: "Gloria Ologure",
+//     role: "General Manager",
+//     photo: "https://randomuser.me/api/portraits/women/68.jpg",
+//     rating: 5,
+//     review:
+//       "Professional, reliable, and attentive. I highly recommend Huda Giant Stride for any travel needs.",
+//   },
+//   {
+//     name: "John Doe",
+//     role: "Frequent Traveler",
+//     photo: "https://randomuser.me/api/portraits/men/12.jpg",
+//     rating: 4,
+//     review:
+//       "Excellent service and smooth booking process. My holiday was perfectly organized.",
+//   },
+//   {
+//     name: "Emma Williams",
+//     role: "Adventure Enthusiast",
+//     photo: "https://randomuser.me/api/portraits/women/55.jpg",
+//     rating: 5,
+//     review:
+//       "Amazing experience! Every detail was taken care of and the tours were incredible. Highly recommend!",
+//   },
+// ];
+
+// const Testimonials = () => {
+//   const [index, setIndex] = useState(0);
+//   const intervalRef = useRef(null);
+  
+
+// useEffect(() => {
+//   intervalRef.current = setInterval(() => {
+//     setIndex((prev) => (prev + 1) % testimonials.length);
+//   }, 2000);
+
+//   return () => clearInterval(intervalRef.current);
+// }, []);
+
+
+//   return (
+//     <Section >
+//       <Heading>Testimonials Of Our Travel Service</Heading>
+//       <p style={{padding:"10px 100px", textAlign:"center", }}>
+//         Looking for the best travel agency in Abuja? Huda Giant Stride Travel and Tours Ltd offers cheap flights, hotel bookings, international tours, vacation packages, student travel, visa assistance, and affordable holiday deals worldwide.
+//       </p>
+// <br/>
+//       <Carousel>
+//         <Arrow left onClick={prev}>
+//           <FaChevronLeft />
+//         </Arrow>
+
+//         <Card key={index}>
+//           <Glow />
+
+//           <Photo src={t.photo} alt={t.name} />
+
+//           <Stars>
+//             {Array.from({ length: t.rating }).map((_, i) => (
+//               <FaStar key={i} />
+//             ))}
+//           </Stars>
+
+//           <Review>"{t.review}"</Review>
+
+//           <ClientName style={{color:"#3d9346"}}>{t.name}</ClientName>
+//           <ClientRole>{t.role}</ClientRole>
+//         </Card>
+
+//         <Arrow onClick={next}>
+//           <FaChevronRight />
+//         </Arrow>
+//       </Carousel>
+
+//       <Dots>
+//         {testimonials.map((_, i) => (
+//           <Dot
+//             key={i}
+//             active={i === index}
+//             onClick={() => setIndex(i)}
+//           />
+//         ))}
+//       </Dots>
+//     </Section>
+//   );
+// };
+
+// export default Testimonials;
+
+// /* ================= STYLES ================= */
+
+// const Section = styled.section`
+//   padding: 6rem 2rem;
+//   background: linear-gradient(135deg, #f8f9fa, #eef7f0);
+//   text-align: center;
+// `;
+
+// const Heading = styled.h2`
+//   font-size: 2.8rem;
+//   color: #3d9346;
+//   // margin-bottom: 3rem;
+// `;
+
+// const Carousel = styled.div`
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   gap: 1rem;
+// `;
+
+// const Card = styled.div`
+//   position: relative;
+//   // width: 380px;
+//   width:100%;
+//   padding: 2.5rem 2rem;
+//   border-radius: 20px;
+//   background: rgba(255, 255, 255, 0.7);
+//   backdrop-filter: blur(14px);
+//   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+//   animation: fadeSlide 0.6s ease;
+
+//   @keyframes fadeSlide {
+//     from {
+//       opacity: 0;
+//       transform: translateX(40px);
+//     }
+//     to {
+//       opacity: 1;
+//       transform: translateX(0);
+//     }
+//   }
+// `;
+
+// const Glow = styled.div`
+//   position: absolute;
+//   inset: 0;
+//   border-radius: 20px;
+//   background: linear-gradient(120deg, #3d9346, #7ed957);
+//   opacity: 0.15;
+//   filter: blur(40px);
+//   z-index: -1;
+// `;
+
+// const Photo = styled.img`
+//   width: 90px;
+//   height: 90px;
+//   border-radius: 50%;
+//   margin-bottom: 1rem;
+//   border: 4px solid #fff;
+// `;
+
+// const Stars = styled.div`
+//   color: #ffd700;
+//   margin-bottom: 1rem;
+// `;
+
+// const Review = styled.p`
+//   font-size: 1rem;
+//   color: #444;
+//   margin-bottom: 1.5rem;
+//   line-height: 1.5;
+// `;
+
+// const ClientName = styled.h4`
+//   font-size: 1.2rem;
+//   margin-bottom: 0.3rem;
+// `;
+
+// const ClientRole = styled.p`
+//   font-size: 0.9rem;
+//   color: #777;
+// `;
+
+// const Arrow = styled.div`
+//   font-size: 1.5rem;
+//   cursor: pointer;
+//   color: #3d9346;
+//   padding: 0.6rem;
+//   border-radius: 50%;
+//   background: #fff;
+//   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+
+//   &:hover {
+//     transform: scale(1.1);
+//   }
+// `;
+
+// const Dots = styled.div`
+//   margin-top: 2rem;
+//   display: flex;
+//   justify-content: center;
+//   gap: 8px;
+// `;
+
+// const Dot = styled.div`
+//   width: 10px;
+//   height: 10px;
+//   border-radius: 50%;
+//   background: ${({ active }) => (active ? "#3d9346" : "#ccc")};
+//   cursor: pointer;
+//   transition: 0.3s;
+
+//   &:hover {
+//     transform: scale(1.2);
+//   }
+// `;
+
+
+
+
+
+import React, { useEffect, useRef, useState } from "react";
+import styled from "styled-components";
+import { FaChevronLeft, FaChevronRight, FaStar } from "react-icons/fa";
+
+// ✅ Testimonials Data with Unsplash Images
+ const testimonials = [
   {
     name: "Nancy Anietie",
     role: "Reservation Officer",
@@ -192,7 +417,7 @@ const testimonials = [
     review:
       "Excellent service and smooth booking process. My holiday was perfectly organized.",
   },
-  {
+   {
     name: "Emma Williams",
     role: "Adventure Enthusiast",
     photo: "https://randomuser.me/api/portraits/women/55.jpg",
@@ -202,26 +427,20 @@ const testimonials = [
   },
 ];
 
+
+
 const Testimonials = () => {
   const [index, setIndex] = useState(0);
   const intervalRef = useRef(null);
 
-  // AUTO SLIDE
+  // AUTO SLIDE (runs once on mount)
   useEffect(() => {
-    startAutoSlide();
-    return stopAutoSlide;
-  }, [index]);
-
-  const startAutoSlide = () => {
-    stopAutoSlide();
     intervalRef.current = setInterval(() => {
       setIndex((prev) => (prev + 1) % testimonials.length);
     }, 2000);
-  };
 
-  const stopAutoSlide = () => {
-    if (intervalRef.current) clearInterval(intervalRef.current);
-  };
+    return () => clearInterval(intervalRef.current);
+  }, []);
 
   const next = () => {
     setIndex((prev) => (prev + 1) % testimonials.length);
@@ -236,12 +455,13 @@ const Testimonials = () => {
   const t = testimonials[index];
 
   return (
-    <Section onMouseEnter={stopAutoSlide} onMouseLeave={startAutoSlide}>
+    <Section>
       <Heading>Testimonials Of Our Travel Service</Heading>
-      <p style={{padding:"10px 100px", textAlign:"center", }}>
+
+      <Desc>
         Looking for the best travel agency in Abuja? Huda Giant Stride Travel and Tours Ltd offers cheap flights, hotel bookings, international tours, vacation packages, student travel, visa assistance, and affordable holiday deals worldwide.
-      </p>
-<br/>
+      </Desc>
+
       <Carousel>
         <Arrow left onClick={prev}>
           <FaChevronLeft />
@@ -260,7 +480,7 @@ const Testimonials = () => {
 
           <Review>"{t.review}"</Review>
 
-          <ClientName style={{color:"#3d9346"}}>{t.name}</ClientName>
+          <ClientName>{t.name}</ClientName>
           <ClientRole>{t.role}</ClientRole>
         </Card>
 
@@ -284,120 +504,87 @@ const Testimonials = () => {
 
 export default Testimonials;
 
-/* ================= STYLES ================= */
+//////////////////////////////////////////////////////
+// STYLES
+//////////////////////////////////////////////////////
 
-const Section = styled.section`
-  padding: 6rem 2rem;
-  background: linear-gradient(135deg, #f8f9fa, #eef7f0);
+const Section = styled.div`
+  padding: 50px 20px;
   text-align: center;
 `;
 
 const Heading = styled.h2`
-  font-size: 2.8rem;
   color: #3d9346;
-  // margin-bottom: 3rem;
+`;
+
+const Desc = styled.p`
+  padding: 10px 100px;
 `;
 
 const Carousel = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: 20px;
+  margin-top: 20px;
 `;
 
 const Card = styled.div`
+  background: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  width: 90%;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
   position: relative;
-  // width: 380px;
-  width:100%;
-  padding: 2.5rem 2rem;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(14px);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
-  animation: fadeSlide 0.6s ease;
-
-  @keyframes fadeSlide {
-    from {
-      opacity: 0;
-      transform: translateX(40px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
 `;
 
 const Glow = styled.div`
   position: absolute;
   inset: 0;
-  border-radius: 20px;
-  background: linear-gradient(120deg, #3d9346, #7ed957);
-  opacity: 0.15;
-  filter: blur(40px);
-  z-index: -1;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(61, 147, 70, 0.3);
 `;
 
 const Photo = styled.img`
-  width: 90px;
-  height: 90px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
-  margin-bottom: 1rem;
-  border: 4px solid #fff;
 `;
 
 const Stars = styled.div`
-  color: #ffd700;
-  margin-bottom: 1rem;
+  color: gold;
+  margin: 10px 0;
 `;
 
 const Review = styled.p`
-  font-size: 1rem;
-  color: #444;
-  margin-bottom: 1.5rem;
-  line-height: 1.5;
+  font-style: italic;
 `;
 
 const ClientName = styled.h4`
-  font-size: 1.2rem;
-  margin-bottom: 0.3rem;
+  color: #3d9346;
 `;
 
 const ClientRole = styled.p`
-  font-size: 0.9rem;
+  font-size: 14px;
   color: #777;
 `;
 
 const Arrow = styled.div`
-  font-size: 1.5rem;
+  font-size: 20px;
   cursor: pointer;
   color: #3d9346;
-  padding: 0.6rem;
-  border-radius: 50%;
-  background: #fff;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-
-  &:hover {
-    transform: scale(1.1);
-  }
 `;
 
 const Dots = styled.div`
-  margin-top: 2rem;
-  display: flex;
-  justify-content: center;
-  gap: 8px;
+  margin-top: 15px;
 `;
 
-const Dot = styled.div`
+const Dot = styled.span`
+  display: inline-block;
   width: 10px;
   height: 10px;
+  margin: 5px;
   border-radius: 50%;
-  background: ${({ active }) => (active ? "#3d9346" : "#ccc")};
+  background: ${(props) => (props.active ? "#3d9346" : "#ccc")};
   cursor: pointer;
-  transition: 0.3s;
-
-  &:hover {
-    transform: scale(1.2);
-  }
 `;

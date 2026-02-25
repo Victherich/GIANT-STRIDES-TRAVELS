@@ -230,10 +230,10 @@ const AdminDetailsPage = ({ adminId, onNavigate }) => {
     <FaHotel /> Post and Manage Hotels
   </ActionItem>
 
-{/* 
-  <ActionItem onClick={() => onNavigate("allstudents")}>
+
+  <ActionItem onClick={() => onNavigate("hotelbookinghistory")}>
     <FaHistory /> Hotels Booking History
-  </ActionItem> */}
+  </ActionItem>
 
   {/* <ActionItem onClick={() => onNavigate("alladmin")}>
     <FaClipboardList /> Tours Booking History

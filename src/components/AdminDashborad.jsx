@@ -8,6 +8,7 @@ import AdminDetailsPage from './AdminProfile';
 import ManageToursPage from './ManageToursPage';
 import DashboardHomeButton from './DashboardHomeButton';
 import ManageHotelsPage from './ManageHotelsPage';
+import HotelBookingHistory from './HotelBookingHistory';
 
 // Styled Components
 const DashboardContainer = styled.div`
@@ -164,6 +165,9 @@ const AdminDashboard = () => {
 
        case "hotels":
       return <ManageHotelsPage />;
+
+      case "hotelbookinghistory":
+      return <HotelBookingHistory />;
 
     default:
       return (

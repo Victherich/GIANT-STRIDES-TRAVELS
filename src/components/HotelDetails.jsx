@@ -305,6 +305,8 @@ const HotelDetails = () => {
   const[selectedGuests, setSelectedGuests]=useState('');
   const [step, setStep] = useState(0);
 
+  console.log(selectedGuests);
+
 const [formData, setFormData] = useState({
   name: "",
   email: "",
@@ -312,6 +314,7 @@ const [formData, setFormData] = useState({
 });
 
 const [paymentProof, setPaymentProof] = useState(null);
+const [confirmEmail, setConfirmEmail]=useState('')
 
 
 
@@ -421,13 +424,23 @@ const handleSubmit = async () => {
 
 
 const handleStep1=()=>{
-  if(!checkInDate||!checkOutDate){
-    Swal.fire({text:"Please ensure to enter both check in and check out date"})
+  if(!checkInDate||!checkOutDate||!selectedGuests){
+    Swal.fire({text:"Please ensure to enter check-in date, check-out date and number of guests"})
     return;
   }
 
   setStep(1);
 }
+
+const handleStep2=(e)=>{
+    e.preventDefault();
+    if(formData.email!==confirmEmail){
+        Swal.fire({text:"Emails do not match"});
+        return;
+    };
+setStep(2);
+}
+
 
 
 
@@ -504,13 +517,11 @@ const handleStep1=()=>{
                 <p style={{fontSize:"small"}}>Select check-out Date:</p>
                 <input type="date" onChange={(e)=>setCheckOutDate(e.target.value)}/>
               </CheckInputs>
+           
 
               <Guests>
-                <select onChange={(e)=>setSelectedGuests(e.target.value)}>
-                  <option value='1'>1 Guest</option>
-                  <option value='2'>2 Guests</option>
-                  <option value='3'>3 Guests</option>
-                </select>
+                <p style={{fontSize:"small"}}>Number of Guests (eg, 1, 2, 3, etc)</p>
+                <input type="number" onChange={(e)=>setSelectedGuests(e.target.value)}/>
               </Guests>
 
               <BookBtn onClick={handleStep1}>Reserve Now</BookBtn>
@@ -524,21 +535,25 @@ const handleStep1=()=>{
       <BackButton/>
       <HotelBookingDetailsModal
   isOpen={step === 1}
-  onClose={() => setStep(0)}
-  onProceed={() => setStep(2)}
+  onClose={() => {setStep(0);setFormData({});setConfirmEmail('')}}
+  onProceed={(e) => handleStep2(e)}
   formData={formData}
   setFormData={setFormData}
+  setConfirmEmail={setConfirmEmail}
+  confirmEmail={confirmEmail}
 />
 
 <HotelAccountPaymentModal
   isOpen={step === 2}
-  onClose={() => setStep(0)}
-  onBack={() => setStep(1)}
+  onClose={() => {setStep(0);setFormData({});setConfirmEmail('');setPaymentProof(null)}}
+  onBack={() => {setStep(1);setPaymentProof(null)}}
   onSubmit={handleSubmit}
   paymentProof={paymentProof}
   setPaymentProof={setPaymentProof}
   hotel={hotel}
 />
+
+
     </Page>
   );
 };
@@ -830,6 +845,12 @@ const Guests = styled.div`
     width: 100%;
     padding: 10px;
     border-radius: 8px;
+  }
+
+   input {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
   }
 `;
 

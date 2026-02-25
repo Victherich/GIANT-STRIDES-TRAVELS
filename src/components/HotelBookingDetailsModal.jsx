@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const BookingDetailsModal = ({
@@ -7,13 +7,21 @@ const BookingDetailsModal = ({
   onProceed,
   formData,
   setFormData,
+  setConfirmEmail,
+  confirmEmail
 }) => {
+
+
+
+
   if (!isOpen) return null;
 
   return (
     <Overlay>
       <Modal>
         <h2 style={{color:"#3D9346"}}>Enter Your Details</h2>
+<Form onSubmit={onProceed}>
+
 
         <input
           type="text"
@@ -22,6 +30,7 @@ const BookingDetailsModal = ({
           onChange={(e) =>
             setFormData({ ...formData, name: e.target.value })
           }
+          required
         />
 
         <input
@@ -31,6 +40,14 @@ const BookingDetailsModal = ({
           onChange={(e) =>
             setFormData({ ...formData, email: e.target.value })
           }
+          required
+        />
+          <input
+          type="email"
+          placeholder="Confirm Email Address"
+          value={confirmEmail}
+          onChange={(e) =>setConfirmEmail(e.target.value)}
+          required
         />
 
         <input
@@ -40,10 +57,12 @@ const BookingDetailsModal = ({
           onChange={(e) =>
             setFormData({ ...formData, phone: e.target.value })
           }
+          required
         />
 
-        <Button onClick={onProceed}>Proceed to Payment</Button>
-        <Close onClick={onClose}>Cancel</Close>
+        <Button type='submit' >Proceed to Payment</Button>
+        <Close type='button'  onClick={onClose}>Cancel</Close>
+        </Form>
       </Modal>
     </Overlay>
   );
@@ -79,6 +98,17 @@ const Modal = styled.div`
     border: 1px solid #ddd;
   }
 `;
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  input {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+  }
+`
 
 const Button = styled.button`
   padding: 12px;
