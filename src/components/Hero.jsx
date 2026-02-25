@@ -5,6 +5,7 @@ import h1 from '../Images/h1.jpeg'
 import h2 from '../Images/h2.jpeg'
 import h3 from '../Images/h3.jpeg'
 import h4 from '../Images/h4.jpeg'
+import h5 from '../Images/h5.jpeg'
 import { useNavigate } from "react-router-dom";
 
 const slides = [
@@ -35,6 +36,12 @@ const slides = [
   image:
     h4,
 },
+
+{
+  title: "Visa Assistance, Travel Insurance & Airport Transfers",
+  text: "We simplify your travel experience with expert visa processing, reliable travel insurance coverage, and seamless airport pickup and drop-off services for a stress-free journey.",
+  image: h5,
+}
 
 ];
 

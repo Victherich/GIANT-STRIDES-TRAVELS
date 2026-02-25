@@ -86,7 +86,7 @@ const HeaderContainer = styled.header`
 `;
 
 const Nav = styled.nav`
-  max-width: 1200px;
+  // max-width: 1200px;
   margin: auto;
   padding: 1rem 2rem;
   display: flex;

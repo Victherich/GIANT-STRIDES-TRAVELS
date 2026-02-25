@@ -294,6 +294,8 @@ import {
 import Swal from "sweetalert2";
 import BackButton from "./BackButton";
 import HotelPayment from "./HotelPayment";
+import HotelBookingDetailsModal from "./HotelBookingDetailsModal";
+import HotelAccountPaymentModal from "./HotelAccountPaymentModal";
 
 const HotelDetails = () => {
   const { id } = useParams();
@@ -301,6 +303,17 @@ const HotelDetails = () => {
   const [checkInDate, setCheckInDate]=useState('');
   const [checkOutDate, setCheckOutDate]=useState('');
   const[selectedGuests, setSelectedGuests]=useState('');
+  const [step, setStep] = useState(0);
+
+const [formData, setFormData] = useState({
+  name: "",
+  email: "",
+  phone: "",
+});
+
+const [paymentProof, setPaymentProof] = useState(null);
+
+
 
   // FETCH HOTEL BY ID
   const fetchHotel = async () => {
@@ -344,6 +357,80 @@ const HotelDetails = () => {
     fetchHotel();
   }, [id]);
 
+
+const handleSubmit = async () => {
+  if (!paymentProof) {
+    Swal.fire("Error", "Please upload payment proof", "error");
+    return;
+  }
+
+  if (!formData.name || !formData.email || !formData.phone) {
+    Swal.fire("Error", "Please fill all your details", "error");
+    return;
+  }
+
+  const form = new FormData();
+
+  // USER
+  form.append("name", formData.name);
+  form.append("email", formData.email);
+  form.append("phone", formData.phone);
+
+  // HOTEL
+  form.append("hotel_id", hotel.id);
+  form.append("hotel_name", hotel.name);
+  form.append("bedroom", hotel.bedroom);
+  form.append("price", hotel.price);
+
+  // BOOKING
+  form.append("check_in", checkInDate);
+  form.append("check_out", checkOutDate);
+  form.append("guests", selectedGuests);
+
+  // FILE
+  form.append("proof", paymentProof);
+
+  try {
+    Swal.fire({
+      title: "Submitting booking...",
+      didOpen: () => Swal.showLoading(),
+    });
+
+    const res = await fetch(
+      "https://hudagiantstridetravelsandtour.com/api/submitHotelBooking.php",
+      {
+        method: "POST",
+        body: form,
+      }
+    );
+
+    const data = await res.json();
+    Swal.close();
+
+    if (data.success) {
+      Swal.fire("Success", "Booking submitted successfully, Please check your email inbox or spam folder for more details", "success");
+      setStep(0);
+    } else {
+      Swal.fire("Error", data.error || "Failed", "error");
+    }
+  } catch (err) {
+    Swal.close();
+    Swal.fire("Error", "Server error", "error");
+  }
+};
+
+
+const handleStep1=()=>{
+  if(!checkInDate||!checkOutDate){
+    Swal.fire({text:"Please ensure to enter both check in and check out date"})
+    return;
+  }
+
+  setStep(1);
+}
+
+
+
   if (!hotel) return <h2 style={{ textAlign: "center" }}>Loading...</h2>;
 
   return (
@@ -363,7 +450,7 @@ const HotelDetails = () => {
         <Content>
           <Fade direction="up" triggerOnce>
             <Left>
-              <h1>{hotel.name}</h1>
+              <h1 style={{color:"#3D9346"}}>{hotel.name} - {hotel.bedroom} Room(s)</h1>
 
               <Location>
                 <FaMapMarkerAlt /> {hotel.location}
@@ -383,7 +470,7 @@ const HotelDetails = () => {
 
               {/* AMENITIES */}
               <Amenities>
-                <h3>Amenities</h3>
+                <h3 style={{color:"#3D9346"}}>Amenities</h3>
                 <ul>
             {hotel.amenities.map((item, idx) => (
               <li key={idx}>✔ {item}</li>
@@ -411,7 +498,10 @@ const HotelDetails = () => {
               
 
               <CheckInputs>
+                <p style={{fontSize:"small"}}>Select check-in Date:</p>
                 <input type="date" onChange={(e)=>setCheckInDate(e.target.value)}/>
+                <br/>
+                <p style={{fontSize:"small"}}>Select check-out Date:</p>
                 <input type="date" onChange={(e)=>setCheckOutDate(e.target.value)}/>
               </CheckInputs>
 
@@ -423,21 +513,32 @@ const HotelDetails = () => {
                 </select>
               </Guests>
 
-              <BookBtn>Reserve Now</BookBtn>
+              <BookBtn onClick={handleStep1}>Reserve Now</BookBtn>
 
-              {/* <HotelPayment
-  hotel={hotel}
-  checkIn={checkInDate}   // collect from input
-  checkOut={checkOutDate} // collect from input
-  guests={selectedGuests} // collect from select
-/> */}
+        
 
-              {/* <Note>No payment needed today</Note> */}
             </BookingBox>
           </Right>
         </Content>
       </Container>
       <BackButton/>
+      <HotelBookingDetailsModal
+  isOpen={step === 1}
+  onClose={() => setStep(0)}
+  onProceed={() => setStep(2)}
+  formData={formData}
+  setFormData={setFormData}
+/>
+
+<HotelAccountPaymentModal
+  isOpen={step === 2}
+  onClose={() => setStep(0)}
+  onBack={() => setStep(1)}
+  onSubmit={handleSubmit}
+  paymentProof={paymentProof}
+  setPaymentProof={setPaymentProof}
+  hotel={hotel}
+/>
     </Page>
   );
 };

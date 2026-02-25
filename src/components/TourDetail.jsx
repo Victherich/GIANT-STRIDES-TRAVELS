@@ -41,8 +41,9 @@ const TourDetail = () => {
         <Left>
           <h2 style={{color:"#3d9346"}}>About this tour</h2>
           <p><strong style={{color:"#3d9346"}}>Location: </strong>{tour.location}</p>
+          <br/>
           <p>{tour.description}</p>
-
+<br/>
           <h3 style={{color:"#3d9346"}}>What's Included</h3>
           <ul>
             {tour.whats_included.map((item, idx) => (

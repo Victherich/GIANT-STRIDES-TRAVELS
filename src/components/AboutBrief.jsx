@@ -19,8 +19,8 @@ const AboutBrief = () => {
 
             {/* LEFT SIDE — TEXT */}
             <Left>
-              <Subtitle>About Huda Giant Stride</Subtitle>
-              <Title>Our Mission & Vision</Title>
+              <Subtitle >About Huda Giant Stride</Subtitle>
+              <Title style={{color:"#3d9346"}}>Our Mission & Vision</Title>
               <Description>
                 Huda Giant Stride Travel and Tours Ltd is dedicated to making
                 every journey seamless, memorable, and enriching. With a passion

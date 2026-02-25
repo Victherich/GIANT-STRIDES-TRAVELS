@@ -23,11 +23,14 @@ import PrivateAdminDashboard from './components/PrivateAdminDashboard'
 import AdminForgotPassword from './components/AdminForgotPassword'
 import VerifyEmail from './components/VerifyEmail'
 import AdminResetPassword from './components/AdminResetPassword'
+import AppUpdate from './components/AppUpdate';
+import wp from './Images/whatsapplogo.png';
 
 
 function App() {
   return (
    <BrowserRouter>
+   <AppUpdate/>
    <ScrollToTop/>
 <Header/>
    <Routes>
@@ -54,6 +57,7 @@ function App() {
         <Route path="/verify/:token" element={<VerifyEmail/>}/>
 
    </Routes>
+    <a><img src={wp} alt="logo" className="WhatsAppIcon" onClick={() => window.open("https://wa.me/23408143576329", "_blank")} /></a> 
    <Footer/>
    </BrowserRouter>
   );

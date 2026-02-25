@@ -78,9 +78,13 @@ const Footer = () => {
             <ContactItem>
               <FaMapMarkerAlt /> Obum plaza,suit 408 ,plot 1140 Adetokunbo ademola crescent wuse 2 Abuja.
             </ContactItem>
+            <ContactItem>
+              <FaEnvelopeOpen /> info@hudagiantstridetravelsandtour.com
+            </ContactItem>
              <ContactItem>
               <FaEnvelopeOpen /> hudagiantstridetraveltourltd@gmail.com
             </ContactItem>
+             
           
           </Column>
 
@@ -103,7 +107,8 @@ export default Footer;
 /* ================== STYLES ================== */
 
 const FooterContainer = styled.footer`
-  background: #111;
+  // background: #111;
+  background: #3D9346;
   color: #fff;
 //   margin-top: 4rem;
 `;
@@ -121,19 +126,19 @@ const Column = styled.div``;
 
 const Logo = styled.h2`
   font-size: 1.5rem;
-  color: #3D9346;
+  color: yellow;
   margin-bottom: 0.2rem;
 `;
 
 const SubLogo = styled.p`
   font-size: 0.9rem;
-  color: #ddd;
+  color: white;
   margin-bottom: 1rem;
 `;
 
 const Text = styled.p`
   line-height: 1.7;
-  color: #bbb;
+  color: white;
   font-size: 0.95rem;
 
 `;
@@ -141,7 +146,7 @@ const Text = styled.p`
 const Title = styled.h3`
   font-size: 1.1rem;
   margin-bottom: 1rem;
-  color: #3D9346;
+  color: yellow;
 `;
 
 const List = styled.ul`
@@ -150,13 +155,13 @@ const List = styled.ul`
 
   li {
     margin-bottom: 0.7rem;
-    color: #ccc;
+    color: white;
     font-size: 0.95rem;
     transition: 0.3s;
   }
 
   li:hover {
-    color: #3D9346;
+    color: orange;
     transform: translateX(4px);
   }
 `;
@@ -165,12 +170,12 @@ const ContactItem = styled.p`
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #ccc;
+  color: white;
   margin-bottom: 0.8rem;
   font-size: 0.95rem;
 
   svg {
-    color: #3D9346;
+    color: white;
   }
 `;
 
@@ -189,17 +194,17 @@ width:100px;
 
 const FooterLink = styled(NavLink)`
   text-decoration: none;
-  color: #ccc;
+  color:white;
   font-size: 0.95rem;
   transition: 0.3s;
 
   &:hover {
-    color: #3D9346;
+    color: yellow;
     transform: translateX(4px);
   }
 
   &.active {
-    color: #3D9346;
+    color: white;
     font-weight: 600;
   }
 `;

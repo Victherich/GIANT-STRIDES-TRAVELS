@@ -246,6 +246,7 @@ return (
         <AddBtn onClick={() => setShowModal(true)}>+ Add Hotel</AddBtn>
       </Header>
 
+{hotels.length<=0&&<Grid>You have no posted hotel</Grid>}
       <Grid>
         {hotels.map((hotel) => {
           const images = hotel.imagesFull;
