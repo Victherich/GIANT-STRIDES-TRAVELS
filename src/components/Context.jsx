@@ -6,16 +6,23 @@ export const Context = createContext();
 
 const ContextProvider = ({children})=>{
 
-    const state = true
+    
 
-    const bankDetail = {
+    const bankDetails = {
         accountName:"Huda Giant Stride Travel And Tours Ltd",
-        Bank1:"GTB"
+        bank1:"GTB",
+        account1:"3003606285",
+
+        bank2:"POLARIS BANK",
+        account2:"4092023120",
+
+        bank3:"Dollar - GTB",
+        account3:"3003606302"
         
     }
 
     return(
-        <Context.Provider value={{state}}>
+        <Context.Provider value={{bankDetails}}>
             {children}
         </Context.Provider>
     )

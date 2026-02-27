@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { Context } from "./Context";
 
 const HotelAccountPaymentModal = ({
   isOpen,
@@ -10,6 +11,10 @@ const HotelAccountPaymentModal = ({
   setPaymentProof,
   hotel,
 }) => {
+
+  const {bankDetails}=useContext(Context);
+
+
   if (!isOpen) return null;
 
   return (
@@ -18,15 +23,19 @@ const HotelAccountPaymentModal = ({
         <h2 style={{color:"#3D9346"}}>Complete Payment</h2>
 
         <BankBox>
-            <p><strong style={{color:"#3D9346"}}>Account Name:</strong>Huda Giant Stride Travel And Tours   Ltd</p>
-          <br/><p><strong style={{color:"#3D9346"}}>Bank:</strong> GT BANK</p>
+            <p><strong style={{color:"#3D9346"}}>Account Name:</strong>{bankDetails.accountName}</p>
+          <br/><p><strong style={{color:"#3D9346"}}>Bank:</strong> {bankDetails.bank1}</p>
           
-          <p><strong style={{color:"#3D9346"}} >Account Number:</strong> 3003606285</p>
+          <p><strong style={{color:"#3D9346"}} >Account Number:</strong> {bankDetails.account1}</p>
           <br/>
-           <p><strong style={{color:"#3D9346"}}>Bank:</strong> POLARIS BANK</p>
+           <p><strong style={{color:"#3D9346"}}>Bank:</strong> {bankDetails.bank2}</p>
           
-          <p><strong style={{color:"#3D9346"}}>Account Number:</strong> 4092023120</p>
+          <p><strong style={{color:"#3D9346"}}>Account Number:</strong> {bankDetails.account2}</p>
 <br/>
+   <p><strong style={{color:"#3D9346"}}>Bank:</strong> {bankDetails.bank3}</p>
+          
+          <p><strong style={{color:"#3D9346"}}>Account Number:</strong> {bankDetails.account3}</p>
+          <br/>
           <p><strong style={{color:"#3D9346"}} >Amount:</strong> ₦ {Number(hotel.price).toLocaleString()}</p>
         </BankBox>
 

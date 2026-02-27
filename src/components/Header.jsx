@@ -124,13 +124,14 @@ const NavLinks = styled.ul`
   @media (max-width: 768px) {
     position: absolute;
     top: 80px;
-    right: ${({ open }) => (open ? "0" : "-100%")};
+    right:0;
     flex-direction: column;
     background: #fff;
     width: 250px;
     padding: 2rem;
     box-shadow: -5px 0 20px rgba(0,0,0,0.1);
     height: calc(100vh - 80px);
+    display: ${({open})=>(open ? "flex":"none")}
   }
 `;
 
