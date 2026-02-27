@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-const BookingDetailsModal = ({
+const HotelBookingDetailsModal = ({
   isOpen,
   onClose,
   onProceed,
@@ -68,7 +68,7 @@ const BookingDetailsModal = ({
   );
 };
 
-export default BookingDetailsModal;
+export default HotelBookingDetailsModal;
 
 /* STYLES */
 

@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Fade } from "react-awesome-reveal";
 import transportImg from "../Images/transfer.png";
+import ContactForm from "./ContactForm";
 
 const AirportTransfers = () => {
   return (
@@ -87,8 +88,8 @@ const AirportTransfers = () => {
             </Points>
           </Why>
 
-          {/* BOOKING FORM */}
-          <FormSection>
+
+          {/* <FormSection>
             <h2>Book Your Ride</h2>
             <Form>
               <input type="text" placeholder="Full Name" required />
@@ -105,7 +106,9 @@ const AirportTransfers = () => {
               <textarea placeholder="Additional Requests" rows={3}></textarea>
               <button>Book Transfer</button>
             </Form>
-          </FormSection>
+          </FormSection> */}
+
+          <ContactForm/>
         </Fade>
       </Container>
     </Page>

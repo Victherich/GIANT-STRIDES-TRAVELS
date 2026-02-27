@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Fade } from "react-awesome-reveal";
+import ContactForm from "./ContactForm";
 
 const TravelInsurance = () => {
   return (
@@ -87,7 +88,7 @@ const TravelInsurance = () => {
           {/* FORM */}
           <FormSection>
             <h2>Get Travel Insurance</h2>
-            <Form>
+            {/* <Form>
               <input type="text" placeholder="Full Name" required />
               <input type="email" placeholder="Email Address" required />
               <input type="tel" placeholder="Phone Number" required />
@@ -103,7 +104,8 @@ const TravelInsurance = () => {
               <textarea placeholder="Additional Details" rows={4}></textarea>
 
               <button>Get Covered Now</button>
-            </Form>
+            </Form> */}
+            <ContactForm/>
           </FormSection>
 
         </Fade>

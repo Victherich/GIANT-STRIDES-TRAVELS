@@ -1,15 +1,18 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { Fade } from "react-awesome-reveal";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../Images/logo.jpeg";
 import HeaderDropdown from "./DropDown";
+import { Context } from "./Context";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef();
   const navigate = useNavigate();
+  const {state}=useContext(Context)
+  console.log(state)
 
   // CLOSE MENU WHEN CLICKING OUTSIDE
   useEffect(() => {
@@ -29,6 +32,7 @@ const Header = () => {
 
   return (
     <HeaderContainer>
+
       <Fade triggerOnce direction="down">
         <Nav ref={menuRef}>
           <Logo as={NavLink} to="/">

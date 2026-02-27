@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const PaymentModal = ({
+const HotelAccountPaymentModal = ({
   isOpen,
   onClose,
   onBack,
@@ -47,7 +47,7 @@ const PaymentModal = ({
   );
 };
 
-export default PaymentModal;
+export default HotelAccountPaymentModal;
 
 /* STYLES */
 

@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Fade } from "react-awesome-reveal";
 import va from '../Images/va.png'
+import ContactForm from "./ContactForm";
 
 const VisaAssistance = () => {
   return (
@@ -90,24 +91,8 @@ const VisaAssistance = () => {
   </Steps>
 </Process>
 
-          {/* FORM */}
-          <FormSection>
-            <h2>Apply for Visa Assistance</h2>
-            <Form>
-              <input type="text" placeholder="Full Name" required />
-              <input type="email" placeholder="Email Address" required />
-              <input type="tel" placeholder="Phone Number" required />
-              <select required>
-                <option value="">Select Country</option>
-                <option value="usa">USA</option>
-                <option value="uk">UK</option>
-                <option value="canada">Canada</option>
-                <option value="other">Other</option>
-              </select>
-              <textarea placeholder="Additional Information" rows={4}></textarea>
-              <button>Submit Application</button>
-            </Form>
-          </FormSection>
+      
+          <ContactForm/>
         </Fade>
       </Container>
     </Page>
