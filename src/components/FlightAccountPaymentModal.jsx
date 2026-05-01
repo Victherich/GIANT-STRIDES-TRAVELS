@@ -1,45 +1,64 @@
 import React from "react";
 import styled from "styled-components";
 
-const HotelAccountPaymentModal = ({
+const FlightAccountPaymentModal = ({
   isOpen,
   onClose,
   onBack,
   onSubmit,
   paymentProof,
   setPaymentProof,
-  hotel,
+  amount,
 }) => {
   if (!isOpen) return null;
 
   return (
     <Overlay>
       <Modal>
-        <h2 style={{color:"#3D9346"}}>Complete Payment</h2>
+        <h2 style={{ color: "#3D9346" }}>Complete Payment</h2>
 
         <BankBox>
-            <p><strong style={{color:"#3D9346"}}>Account Name:</strong>Huda Giant Stride Travel And Tours   Ltd</p>
-          <br/><p><strong style={{color:"#3D9346"}}>Bank:</strong> GT BANK</p>
-          
-          <p><strong style={{color:"#3D9346"}} >Account Number:</strong> 3003606285</p>
-          <br/>
-           <p><strong style={{color:"#3D9346"}}>Bank:</strong> POLARIS BANK</p>
-          
-          <p><strong style={{color:"#3D9346"}}>Account Number:</strong> 4092023120</p>
+          <p>
+            <strong style={{ color: "#3D9346" }}>Account Name:</strong>
+            Huda Giant Stride Travel And Tours Ltd
+          </p>
 
-                 <br/>
+          <br />
+
+          <p>
+            <strong style={{ color: "#3D9346" }}>Bank:</strong> GT BANK
+          </p>
+          <p>
+            <strong style={{ color: "#3D9346" }}>Account Number:</strong> 3003606285
+          </p>
+
+          <br />
+
+          <p>
+            <strong style={{ color: "#3D9346" }}>Bank:</strong> POLARIS BANK
+          </p>
+          <p>
+            <strong style={{ color: "#3D9346" }}>Account Number:</strong> 4092023120
+          </p>
+
+          <br/>
            <p><strong style={{color:"#3D9346"}}>Bank:</strong> GT BANK (DOLLAR)</p>
           
           <p><strong style={{color:"#3D9346"}}>Account Number:</strong> 3003606302</p>
-<br/>
-          <p><strong style={{color:"#3D9346"}} >Amount:</strong> ₦ {Number(hotel.price).toLocaleString()}</p>
+
+          <br />
+
+          <p>
+            <strong style={{ color: "#3D9346" }}>Amount:</strong> ₦{" "}
+            {Number(amount).toLocaleString()}
+          </p>
         </BankBox>
 
         <p>Upload Payment Proof</p>
 
         <input
           type="file"
-          accept="image/*"
+          accept="image/*,application/pdf"
           onChange={(e) => setPaymentProof(e.target.files[0])}
         />
 
@@ -52,7 +71,7 @@ const HotelAccountPaymentModal = ({
   );
 };
 
-export default HotelAccountPaymentModal;
+export default FlightAccountPaymentModal;
 
 /* STYLES */
 

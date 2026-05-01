@@ -9,6 +9,8 @@ import ManageToursPage from './ManageToursPage';
 import DashboardHomeButton from './DashboardHomeButton';
 import ManageHotelsPage from './ManageHotelsPage';
 import HotelBookingHistory from './HotelBookingHistory';
+import TourBookingHistory from './TourBookingHistory';
+import FlightBookingHistory from './FlightBookingHistory';
 
 // Styled Components
 const DashboardContainer = styled.div`
@@ -168,6 +170,12 @@ const AdminDashboard = () => {
 
       case "hotelbookinghistory":
       return <HotelBookingHistory />;
+
+         case "tourbookinghistory":
+      return <TourBookingHistory/>;
+
+         case "flightbookinghistory":
+      return <FlightBookingHistory/>;
 
     default:
       return (

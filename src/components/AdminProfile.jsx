@@ -235,13 +235,13 @@ const AdminDetailsPage = ({ adminId, onNavigate }) => {
     <FaHistory /> Hotels Booking History
   </ActionItem>
 
-  {/* <ActionItem onClick={() => onNavigate("alladmin")}>
+  <ActionItem onClick={() => onNavigate("tourbookinghistory")}>
     <FaClipboardList /> Tours Booking History
-  </ActionItem> */}
+  </ActionItem>
 
-  {/* <ActionItem onClick={() => onNavigate("alladmin")}>
+  <ActionItem onClick={() => onNavigate("flightbookinghistory")}>
     <FaPlane /> Flights Booking History
-  </ActionItem> */}
+  </ActionItem>
 
 
   {/*  */}

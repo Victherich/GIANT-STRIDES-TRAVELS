@@ -37,7 +37,6 @@ const ModalOverlay = styled.div`
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,0.6);
-  z-index:400;
 `;
 
 const ModalContent = styled.div`
@@ -46,21 +45,22 @@ const ModalContent = styled.div`
   width: 500px;
   margin: 100px auto;
   border-radius: 10px;
+  z-index:400;
 `;
 
-export default function HotelBookingHistory() {
+export default function TourBookingHistory() {
   const [bookings, setBookings] = useState([]);
   const [selected, setSelected] = useState(null);
   const [searchEmail, setSearchEmail] = useState("");
   const [filteredBookings, setFilteredBookings] = useState([]);
 
   useEffect(() => {
-    fetch("https://hudagiantstridetravelsandtour.com/api/getHotelBookings.php")
+    fetch("https://hudagiantstridetravelsandtour.com/api/getTourBookings.php")
       .then(res => res.json())
       .then(data => {
         if (data.success) {
           setBookings(data.bookings);
-          setFilteredBookings(data.bookings); // initialize filtered list
+          setFilteredBookings(data.bookings);
         }
       });
   }, []);
@@ -77,7 +77,7 @@ export default function HotelBookingHistory() {
     formData.append("id", id);
     formData.append(field, value);
 
-    fetch("https://hudagiantstridetravelsandtour.com/api/updateHotelBooking.php", {
+    fetch("https://hudagiantstridetravelsandtour.com/api/updateTourBooking.php", {
       method: "POST",
       body: formData,
     })
@@ -94,7 +94,7 @@ export default function HotelBookingHistory() {
 
   return (
     <Container>
-      <h2 style={{color:"#3D9346"}}>Hotel Bookings</h2>
+      <h2 style={{color:"#3D9346"}}>Tour Bookings</h2>
 
       <SearchInput
         type="text"
@@ -102,15 +102,19 @@ export default function HotelBookingHistory() {
         value={searchEmail}
         onChange={(e) => setSearchEmail(e.target.value)}
       />
-      {filteredBookings.length<=0&&<p>
-        No bookings yet
-      </p>}
+
+      {filteredBookings.length <= 0 && <p>No bookings yet</p>}
 
       {filteredBookings.map((b) => (
         <Card key={b.id}>
-          <p><strong style={{color:"#3D9346"}}>{b.hotel_name}</strong> - {b.bedroom} bedroom(s)</p>
+          <p>
+            <strong style={{color:"#3D9346"}}>
+              {b.tour_title}
+            </strong>
+          </p>
           <p>{b.name} ({b.email})</p>
-          <p>₦ {Number(b.price).toLocaleString()}</p>
+          <p>₦ {Number(b.tour_price).toLocaleString()}</p>
+
           <Button onClick={() => setSelected(b)}>View</Button>
         </Card>
       ))}
@@ -118,23 +122,16 @@ export default function HotelBookingHistory() {
       {selected && (
         <ModalOverlay onClick={() => setSelected(null)}>
           <ModalContent onClick={(e) => e.stopPropagation()}>
-            <h3  style={{color:"#3D9346"}}>Hotel Booking Details</h3>
+            <h3 style={{color:"#3D9346"}}>Tour Booking Details</h3>
 
-            <p><strong style={{color:"#3D9346"}}>Hotel:</strong> {selected.hotel_name}</p>
-            <p><strong style={{color:"#3D9346"}}>Room:</strong> {selected.bedroom}</p>
-            <p><strong style={{color:"#3D9346"}}>Price:</strong> ₦{selected.price}</p>
+            <p><strong style={{color:"#3D9346"}}>Tour:</strong> {selected.tour_title}</p>
+            <p><strong style={{color:"#3D9346"}}>Price:</strong> ₦{selected.tour_price}</p>
 
             <hr />
 
             <p><strong style={{color:"#3D9346"}}>Name:</strong> {selected.name}</p>
             <p><strong style={{color:"#3D9346"}}>Email:</strong> {selected.email}</p>
             <p><strong style={{color:"#3D9346"}}>Phone:</strong> {selected.phone}</p>
-
-            <hr />
-
-            <p><strong style={{color:"#3D9346"}}>Check-in:</strong> {selected.check_in}</p>
-            <p><strong style={{color:"#3D9346"}}>Check-out:</strong> {selected.check_out}</p>
-            <p><strong style={{color:"#3D9346"}}>Guests:</strong> {selected.guests}</p>
 
             <hr />
 
@@ -167,7 +164,11 @@ export default function HotelBookingHistory() {
 
             <p>
               <strong style={{color:"#3D9346"}}>Proof of Payment:</strong><br />
-              <a href={`https://hudagiantstridetravelsandtour.com/api/${selected.payment_proof}`} target="_blank" rel="noreferrer">
+              <a
+                href={`https://hudagiantstridetravelsandtour.com/api/${selected.payment_proof}`}
+                target="_blank"
+                rel="noreferrer"
+              >
                 View File
               </a>
             </p>

@@ -54,10 +54,15 @@ const TourAccountPaymentModal = ({
           <p>
             <strong style={{ color: "#3D9346" }}>Bank:</strong> POLARIS BANK
           </p>
+          
           <p>
             <strong style={{ color: "#3D9346" }}>Account Number:</strong>{" "}
             4092023120
           </p>
+          <br/>
+           <p><strong style={{color:"#3D9346"}}>Bank:</strong> GT BANK (DOLLAR)</p>
+          
+          <p><strong style={{color:"#3D9346"}}>Account Number:</strong> 3003606302</p>
 
           <br />
 

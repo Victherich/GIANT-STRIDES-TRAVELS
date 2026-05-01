@@ -6,59 +6,11 @@ import Swal from 'sweetalert2';
 import PaystackPop from '@paystack/inline-js';
 import fb from '../Images/usa.png';
 import { airportList } from './AirportList';
+import FlightAccountPaymentModal from "./FlightAccountPaymentModal";
 
 // --- Global Constants ---
 const FLIGHT_PRICE_PER_PERSON = 150000; // Fixed price in NGN
 const BUSINESS_FEE = 1500; // Fixed business fee in NGN
-
-// --- Manual Airport List ---
-
-
-// // --- Styled Components ---
-// const BookingSectionWrapper = styled.div`
-//   padding-top:100px;
-//   position: relative;
-//   width: 100%;
-//   min-height: 100vh;
-//   background-image: url(${fb});
-//   background-size: cover;
-//   background-position: center;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   justify-content: center;
-//   color: #ffffff;
-// `;
-
-// const Overlay = styled.div`
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   width: 100%;
-//   height: 100%;
-//   background-color: rgba(0, 0, 0, 0.6);
-//   z-index: 0;
-// `;
-
-// const BookingFormContainer = styled.div`
-//   position: relative;
-//   z-index: 1;
-//   background-color: #1246c9ff;
-//   border-radius: 15px;
-//   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-//   padding: 40px;
-//   max-width: 1200px;
-//   width: 90%;
-//   display: flex;
-//   flex-direction: column;
-// `;
-
-// const FormTitle = styled.h2`
-//   color: #ffffff;
-//   font-size: 28px;
-//   text-align: center;
-//   margin-bottom: 20px;
-// `;
 
 const FormRow = styled.div`
   display: flex;
@@ -75,37 +27,6 @@ const FormInput = styled.div`
   flex-grow: 1;
 `;
 
-// const Label = styled.label`
-//   font-size: 14px;
-//   font-weight: bold;
-//   color: rgba(255, 255, 255, 0.8);
-//   margin-bottom: 5px;
-// `;
-
-// const TripTypeSelect = styled.select`
-//   appearance: none;
-//   background-color: #ffffff;
-//   color: #0d286d;
-//   font-size: 16px;
-//   font-weight: bold;
-//   padding: 10px 15px;
-//   border: none;
-//   border-radius: 5px;
-//   cursor: pointer;
-//   width: 150px;
-// `;
-
-// const InputField = styled.input`
-//   width: 100%;
-//   padding: 15px 15px 15px 45px;
-//   border: none;
-//   border-radius: 8px;
-//   font-size: 16px;
-//   color: #333333;
-//   &::placeholder {
-//     color: #999999;
-//   }
-// `;
 
 const InputIconContainer = styled.div`
   position: relative;
@@ -114,40 +35,12 @@ const InputIconContainer = styled.div`
   align-items: center;
 `;
 
-// const InputIcon = styled.div`
-//   position: absolute;
-//   left: 15px;
-//   color: #0d286d;
-//   font-size: 20px;
-//   margin-top:10px;
-// `;
 
 const InputWrapper = styled.div`
   position: relative;
   flex-grow: 1;
 `;
 
-// const ActionButton = styled.button`
-//   background-color: #e60000;
-//   color: #ffffff;
-//   font-size: 20px;
-//   font-weight: bold;
-//   padding: 15px 40px;
-//   border: none;
-//   border-radius: 8px;
-//   cursor: pointer;
-//   transition: background-color 0.3s ease;
-//   &:hover { background-color: #cc0000; }
-//   &:disabled { background-color: #cccccc; cursor: not-allowed; }
-// `;
-
-// const ResultsContainer = styled.div`
-//   background-color: rgba(255, 255, 255, 0.9);
-//   padding: 30px;
-//   border-radius: 10px;
-//   color: #333;
-//   text-align: center;
-// `;
 
 const PassengerInputSection = styled.div`
   display: flex;
@@ -156,52 +49,6 @@ const PassengerInputSection = styled.div`
   margin-top: 20px;
 `;
 
-// const BackButton = styled.button`
-//   background: none;
-//   border: none;
-//   color: #ffffff;
-//   cursor: pointer;
-//   margin-top: 15px;
-//   font-size: 16px;
-//   &:hover { text-decoration: underline; }
-// `;
-
-// const BackButton2 = styled.button`
-//   background: none;
-//   border: none;
-//   color: #222;
-//   cursor: pointer;
-//   margin-top: 15px;
-//   font-size: 16px;
-//   &:hover { text-decoration: underline; }
-// `;
-
-// // --- Suggestions Dropdown ---
-// const SuggestionsList = styled.ul`
-//   position: absolute;
-//   top: 100%;
-//   left: 0;
-//   right: 0;
-//   background: #fff;
-//   border: 1px solid #ccc;
-//   border-radius: 8px;
-//   list-style: none;
-//   margin: 0;
-//   padding: 0;
-//   z-index: 10;
-//   max-height: 200px;
-//   overflow-y: auto;
-// `;
-
-// const SuggestionItem = styled.li`
-//   padding: 10px;
-//   cursor: pointer;
-//   font-size: 14px;
-//   color:#222;
-//   &:hover {
-//     background: #f0f0f0;
-//   }
-// `;
 
 
 const BookingSectionWrapper = styled.div`
@@ -358,6 +205,8 @@ const SuggestionItem = styled.li`
 
 // --- React Component ---
 const FlightBookingApp = () => {
+  const [showModal, setShowModal] = useState(false);
+const [paymentProof, setPaymentProof] = useState(null);
   const [step, setStep] = useState('search');
   const [formData, setFormData] = useState({
     tripType: 'Round Trip',
@@ -430,8 +279,80 @@ const FlightBookingApp = () => {
       });
       return;
     }
-    payWithPaystack();
+    // payWithPaystack();
+    setShowModal(true);
   };
+
+
+
+
+
+
+
+
+
+
+
+
+  const submitBooking = async () => {
+  if (!paymentProof) {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Upload Required',
+      text: 'Please upload proof of payment.',
+    });
+    return;
+  }
+
+  setIsSubmitting(true);
+
+  const data = new FormData();
+
+  Swal.fire({text:"Please wait..."});
+  Swal.showLoading();
+
+  // booking details
+  Object.keys(formData).forEach(key => {
+    data.append(key, formData[key]);
+  });
+
+  data.append("amount", totalAmount);
+  data.append("proof", paymentProof);
+
+  try {
+    const res = await fetch(
+      "https://hudagiantstridetravelsandtour.com/api/submitFlightBooking.php",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+
+    const result = await res.json();
+
+    if (result.success) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Booking Submitted',
+        text: 'We received your booking and payment proof. Check your email.',
+      }).then(() => {
+        setShowModal(false);
+        setStep('search');
+        window.location.reload();
+      });
+    } else {
+      throw new Error(result.error);
+    }
+  } catch (err) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Submission Failed',
+      text: err.message,
+    });
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
 
 
@@ -651,7 +572,10 @@ const FlightBookingApp = () => {
               <FaSearch /> Search
             </ActionButton>
           </form>
+
+          
         );
+        
 
       case 'results':
         return (
@@ -694,6 +618,7 @@ const FlightBookingApp = () => {
               </ActionButton>
             </FormRow>
             <BackButton onClick={() => setStep('results')}>&larr; Back</BackButton>
+            
           </form>
         );
 
@@ -708,6 +633,16 @@ const FlightBookingApp = () => {
       <BookingFormContainer>
         {renderContent()}
       </BookingFormContainer>
+
+      <FlightAccountPaymentModal
+  isOpen={showModal}
+  onClose={() => setShowModal(false)}
+  onBack={() => setShowModal(false)}
+  onSubmit={submitBooking}
+  paymentProof={paymentProof}
+  setPaymentProof={setPaymentProof}
+  amount={totalAmount}
+/>
     </BookingSectionWrapper>
   );
 };
